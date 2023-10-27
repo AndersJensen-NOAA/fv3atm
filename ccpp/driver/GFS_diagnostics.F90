@@ -4463,6 +4463,17 @@ module GFS_diagnostics
         enddo
 
         idx = idx + 1
+        ExtDiag(idx)%axes = 3
+        ExtDiag(idx)%name = 'prog_cf'
+        ExtDiag(idx)%desc = 'prognostic cloud fraction'
+        ExtDiag(idx)%unit = 'frac'
+        ExtDiag(idx)%mod_name = 'gfs_phys'
+        allocate (ExtDiag(idx)%data(nblks))
+        do nb = 1,nblks
+          ExtDiag(idx)%data(nb)%var3 => Statein(nb)%qgrs(:,:,Model%ntcf)
+        enddo
+
+        idx = idx + 1
         ExtDiag(idx)%axes = 2
         ExtDiag(idx)%name = 'nwfa2d'
         ExtDiag(idx)%desc = 'water-friendly surface aerosol source'

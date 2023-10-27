@@ -1434,6 +1434,7 @@ module GFS_typedefs
     integer              :: nto2            !< tracer index for oxygen
     integer              :: ntwa            !< tracer index for water friendly aerosol
     integer              :: ntia            !< tracer index for ice friendly aerosol
+    integer              :: ntcf            !< tracer index for cloud fraction
     integer              :: ntsmoke         !< tracer index for smoke
     integer              :: ntdust          !< tracer index for dust
     integer              :: ntcoarsepm      !< tracer index for coarse PM
@@ -5000,6 +5001,7 @@ module GFS_typedefs
     Model%nqrimef          = get_tracer_index(Model%tracer_names, 'q_rimef',    Model%me, Model%master, Model%debug)
     Model%ntwa             = get_tracer_index(Model%tracer_names, 'liq_aero',   Model%me, Model%master, Model%debug)
     Model%ntia             = get_tracer_index(Model%tracer_names, 'ice_aero',   Model%me, Model%master, Model%debug)
+    Model%ntcf             = get_tracer_index(Model%tracer_names, 'prog_cf',    Model%me, Model%master, Model%debug)
     if (Model%rrfs_sd) then
     Model%ntsmoke          = get_tracer_index(Model%tracer_names, 'smoke',      Model%me, Model%master, Model%debug)
     Model%ntdust           = get_tracer_index(Model%tracer_names, 'dust',       Model%me, Model%master, Model%debug)
@@ -5180,6 +5182,7 @@ module GFS_typedefs
         call label_dtend_tracer(Model,100+Model%nqrimef,'q_rimef','mass weighted rime factor','kg-1 s-1')
         call label_dtend_tracer(Model,100+Model%ntwa,'liq_aero','number concentration of water-friendly aerosols','kg-1 s-1')
         call label_dtend_tracer(Model,100+Model%ntia,'ice_aero','number concentration of ice-friendly aerosols','kg-1 s-1')
+        call label_dtend_tracer(Model,100+Model%ntcf,'prog_cf','prognostic cloud fraction','frac')
         call label_dtend_tracer(Model,100+Model%nto,'o_ion','oxygen ion concentration','kg kg-1 s-1')
         call label_dtend_tracer(Model,100+Model%nto2,'o2','oxygen concentration','kg kg-1 s-1')
 
@@ -6742,6 +6745,7 @@ module GFS_typedefs
       print *, ' nto2              : ', Model%nto2
       print *, ' ntwa              : ', Model%ntwa
       print *, ' ntia              : ', Model%ntia
+      print *, ' ntcf              : ', Model%ntcf
       print *, ' ntsmoke           : ', Model%ntsmoke
       print *, ' ntdust            : ', Model%ntdust
       print *, ' ntcoarsepm        : ', Model%ntcoarsepm

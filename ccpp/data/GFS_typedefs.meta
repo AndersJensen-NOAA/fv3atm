@@ -560,6 +560,13 @@
   type = real
   kind = kind_phys
   active = ( index_of_graupel_volume_in_tracer_concentration_array > 0 )
+[qgrs(:,:,index_of_cloud_area_fraction_in_atmosphere_layer_in_tracer_concentration_array)]
+  standard_name = cloud_area_fraction_in_atmosphere_layer
+  long_name = cloud area fraction in atmosphere layer
+  units = frac
+  dimensions = (horizontal_loop_extent,vertical_layer_dimension)
+  type = real
+  kind = kind_phys
 [gq0(:,:,index_of_hail_volume_in_tracer_concentration_array)]
   standard_name = hail_volume_of_new_state
   long_name = hail volume updated by physics
@@ -6152,6 +6159,12 @@
 [ntwa]
   standard_name = index_of_mass_number_concentration_of_hygroscopic_aerosols_in_tracer_concentration_array
   long_name = tracer index for water friendly aerosol
+  units = index
+  dimensions = ()
+  type = integer
+[ntcf]
+  standard_name = index_of_cloud_fraction_in_tracer_concentration_array
+  long_name = tracer index for cloud fraction
   units = index
   dimensions = ()
   type = integer
