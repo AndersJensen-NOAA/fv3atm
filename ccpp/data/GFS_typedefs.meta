@@ -256,6 +256,13 @@
   dimensions = (horizontal_loop_extent,vertical_layer_dimension)
   type = real
   kind = kind_phys
+[qgrs(:,:,index_of_prognostic_cloud_fraction_in_tracer_concentration_array)]
+  standard_name = prognostic_cloud_fraction
+  long_name = prognostic cloud fraction
+  units = frac
+  dimensions = (horizontal_loop_extent,vertical_layer_dimension)
+  type = real
+  kind = kind_phys
 [qgrs(:,:,index_of_mass_number_concentration_of_snow_in_tracer_concentration_array)]
   standard_name = mass_number_concentration_of_snow_in_air
   long_name = number concentration of snow
@@ -511,6 +518,13 @@
   standard_name = mass_number_concentration_of_rain_of_new_state
   long_name = number concentration of rain updated by physics
   units = kg-1
+  dimensions = (horizontal_loop_extent,vertical_layer_dimension)
+  type = real
+  kind = kind_phys
+[gq0(:,:,index_of_prognostic_cloud_fraction_in_tracer_concentration_array)]
+  standard_name = prognostic_cloud_fraction_of_new_state
+  long_name = prognostic cloud fraction updated by physics
+  units = frac
   dimensions = (horizontal_loop_extent,vertical_layer_dimension)
   type = real
   kind = kind_phys
@@ -6176,6 +6190,12 @@
 [ntcoarsepm]
   standard_name = index_for_coarse_particulate_matter_in_tracer_concentration_array
   long_name = tracer index for coarse particulate matter
+  units = index
+  dimensions = ()
+  type = integer
+[ntcloud]
+  standard_name = index_of_prognostic_cloud_fraction_in_tracer_concentration_array
+  long_name = tracer index for prognostic cloud fraction
   units = index
   dimensions = ()
   type = integer

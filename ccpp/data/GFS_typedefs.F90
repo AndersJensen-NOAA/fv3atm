@@ -1437,6 +1437,7 @@ module GFS_typedefs
     integer              :: ntsmoke         !< tracer index for smoke
     integer              :: ntdust          !< tracer index for dust
     integer              :: ntcoarsepm      !< tracer index for coarse PM
+    integer              :: ntcloud         !< tracer index for prognostic cloud fraction
     integer              :: nchem = 3       !< number of prognostic chemical species (vertically mixied)
     integer              :: ndvel = 3       !< number of prognostic chemical species (which are deposited, usually =nchem)
     integer              :: ntchm           !< number of prognostic chemical tracers (advected)
@@ -5000,6 +5001,7 @@ module GFS_typedefs
     Model%nqrimef          = get_tracer_index(Model%tracer_names, 'q_rimef',    Model%me, Model%master, Model%debug)
     Model%ntwa             = get_tracer_index(Model%tracer_names, 'liq_aero',   Model%me, Model%master, Model%debug)
     Model%ntia             = get_tracer_index(Model%tracer_names, 'ice_aero',   Model%me, Model%master, Model%debug)
+    Model%ntcloud          = get_tracer_index(Model%tracer_names, 'prog_cldamt',Model%me, Model%master, Model%debug)
     if (Model%rrfs_sd) then
     Model%ntsmoke          = get_tracer_index(Model%tracer_names, 'smoke',      Model%me, Model%master, Model%debug)
     Model%ntdust           = get_tracer_index(Model%tracer_names, 'dust',       Model%me, Model%master, Model%debug)
@@ -6745,6 +6747,7 @@ module GFS_typedefs
       print *, ' ntsmoke           : ', Model%ntsmoke
       print *, ' ntdust            : ', Model%ntdust
       print *, ' ntcoarsepm        : ', Model%ntcoarsepm
+      print *, ' ntcloud           : ', Model%ntcloud
       print *, ' nchem             : ', Model%nchem
       print *, ' ndvel             : ', Model%ndvel
       print *, ' ntchm             : ', Model%ntchm

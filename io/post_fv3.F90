@@ -512,7 +512,7 @@ module post_fv3
                              qqnifa, effri, effrl, effrs, aextc55, taod5503d,  &
                              duem, dusd, dudp, duwt, dusv, ssem, sssd, ssdp,   &
                              sswt, sssv, bcem, bcsd, bcdp, bcwt, bcsv, ocem,   &
-                             ocsd, ocdp, ocwt, ocsv, rhomid
+                             ocsd, ocdp, ocwt, ocsv, rhomid, prog_cldamt
       use vrbls2d,     only: f, pd, sigt4, fis, pblh, ustar, z0, ths, qs, twbs,&
                              qwbs, avgcprate, cprate, avgprec, prec, lspa, sno,&
                              cldefi, th10, q10, tshltr, pshltr, albase,        &
@@ -3858,6 +3858,19 @@ module post_fv3
                   do i=ista, iend
                     effri(i,j,l)=arrayr43d(i,j,l)
                     if(abs(arrayr43d(i,j,l)-fillvalue)<small) effri(i,j,l) = spval
+                  enddo
+                enddo
+              enddo
+            endif
+
+            ! AAJ prognostic cloud fraction
+            if(trim(fieldname)=='prog_cldamt') then
+              !$omp parallel do default(none) private(i,j,l) shared(lm,jsta,jend,ista,iend,prog_cldamt,arrayr43d,spval,fillvalue)
+              do l=1,lm
+                do j=jsta,jend
+                  do i=ista, iend
+                    prog_cldamt(i,j,l)=arrayr43d(i,j,l)
+                    if(abs(arrayr43d(i,j,l)-fillvalue)<small) prog_cldamt(i,j,l) = spval
                   enddo
                 enddo
               enddo
