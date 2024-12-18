@@ -10087,7 +10087,7 @@
   relative_path = ../physics/physics/
   dependencies = hooks/machine.F,hooks/physcons.F90
   dependencies = Radiation/RRTMG/radlw_param.f,Radiation/RRTMG/radsw_param.f
-  dependencies = MP/TEMPO/tempo/module_mp_thompson_params.F90
+  dependencies = MP/TEMPO/tempo/module_mp_tempo_params.F90
   dependencies = photochem/module_ozphys.F90,photochem/module_h2ophys.F90
   dependencies = MP/GFDL/GFDL_parse_tracers.F90
 
