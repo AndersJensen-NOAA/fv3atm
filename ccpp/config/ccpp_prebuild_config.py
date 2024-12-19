@@ -47,8 +47,8 @@ TYPEDEFS_NEW_METADATA = {
         'module_ozphys' : '',
         'ty_ozphys'     : '',
         },
-    'module_mp_thompson_params' : {
-        'module_mp_thompson_params' : '',
+    'module_mp_tempo_params' : {
+        'module_mp_tempo_params' : '',
         'ty_tempo_cfg'     : '',
         },
     'module_h2ophys' : {

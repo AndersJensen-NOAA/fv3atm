@@ -15,7 +15,7 @@ module GFS_typedefs
 
    use module_radsw_parameters,  only: topfsw_type, sfcfsw_type
    use module_radlw_parameters,  only: topflw_type, sfcflw_type
-   use module_mp_thompson_params,only: ty_tempo_cfg
+   use module_mp_tempo_params,only: ty_tempo_cfg
    use module_ozphys,            only: ty_ozphys
    use module_h2ophys,           only: ty_h2ophys
    use land_iau_mod,             only: land_iau_external_data_type, land_iau_control_type, &
