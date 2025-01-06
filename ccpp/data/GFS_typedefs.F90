@@ -942,7 +942,7 @@ module GFS_typedefs
     integer              :: imp_physics                    !< choice of microphysics scheme
     integer              :: imp_physics_gfdl          = 11 !< choice of GFDL     microphysics scheme
     integer              :: imp_physics_thompson      = 8  !< choice of Thompson microphysics scheme
-    integer              :: imp_physics_tempo         = 8  !< choice of TEMPO    microphysics scheme
+    integer              :: imp_physics_tempo         = 88 !< choice of TEMPO    microphysics scheme
     integer              :: imp_physics_wsm6          = 6  !< choice of WSMG     microphysics scheme
     integer              :: imp_physics_zhao_carr     = 99 !< choice of Zhao-Carr microphysics scheme
     integer              :: imp_physics_zhao_carr_pdf = 98 !< choice of Zhao-Carr microphysics scheme with PDF clouds
