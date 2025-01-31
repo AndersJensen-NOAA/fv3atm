@@ -15,6 +15,7 @@ module GFS_typedefs
 
    use module_radsw_parameters,  only: topfsw_type, sfcfsw_type
    use module_radlw_parameters,  only: topflw_type, sfcflw_type
+   use module_mp_tempo_params,   only: ty_tempo_cfg
    use module_ozphys,            only: ty_ozphys
    use module_h2ophys,           only: ty_h2ophys
    use land_iau_mod,             only: land_iau_external_data_type, land_iau_control_type, &
@@ -943,6 +944,7 @@ module GFS_typedefs
     integer              :: imp_physics                    !< choice of microphysics scheme
     integer              :: imp_physics_gfdl          = 11 !< choice of GFDL     microphysics scheme
     integer              :: imp_physics_thompson      = 8  !< choice of Thompson microphysics scheme
+    integer              :: imp_physics_tempo         = 88 !< choice of TEMPO microphysics scheme
     integer              :: imp_physics_wsm6          = 6  !< choice of WSMG     microphysics scheme
     integer              :: imp_physics_zhao_carr     = 99 !< choice of Zhao-Carr microphysics scheme
     integer              :: imp_physics_zhao_carr_pdf = 98 !< choice of Zhao-Carr microphysics scheme with PDF clouds
@@ -1035,6 +1037,7 @@ module GFS_typedefs
     real(kind=kind_phys) :: dt_inner        !< time step for the inner loop in s
     logical              :: sedi_semi       !< flag for semi Lagrangian sedi of rain
     integer              :: decfl           !< deformed CFL factor
+    type(ty_tempo_cfg)   :: tempo_cfg       !< Thompson MP configuration information.
     logical              :: thompson_mp_is_init=.false. !< Local scheme initialization flag
 
     !--- GFDL microphysical paramters
@@ -4874,7 +4877,7 @@ module GFS_typedefs
     Model%exticeden        = exticeden
     if (Model%exticeden .and. &
       (Model%imp_physics /= Model%imp_physics_gfdl .and. Model%imp_physics /= Model%imp_physics_thompson .and. &
-       Model%imp_physics /= Model%imp_physics_nssl )) then
+       Model%imp_physics /= Model%imp_physics_nssl .and. Model%imp_physics /= Model%imp_physics_tempo)) then
       !see GFS_MP_generic_post.F90; exticeden is only compatible with GFDL,
       !Thompson, or NSSL MP
       print *,' Using exticeden = T is only valid when using GFDL, Thompson, or NSSL microphysics.'
@@ -5793,8 +5796,9 @@ module GFS_typedefs
 !--- BEGIN CODE FROM COMPNS_PHYSICS
 !--- shoc scheme
     if (do_shoc) then
-      if (Model%imp_physics == Model%imp_physics_thompson) then
-        print *,'SHOC is not currently compatible with Thompson MP -- shutting down'
+       if ((Model%imp_physics == Model%imp_physics_thompson) .or. &
+            (Model%imp_physics == Model%imp_physics_tempo)) then
+        print *,'SHOC is not currently compatible with Thompson/TEMPO  MP -- shutting down'
         stop
       endif
       Model%nshoc_3d   = 3
@@ -6154,7 +6158,8 @@ module GFS_typedefs
                                           ' num_p2d =',Model%num_p2d
 
 
-    elseif (Model%imp_physics == Model%imp_physics_thompson) then !Thompson microphysics
+   elseif ((Model%imp_physics == Model%imp_physics_thompson) .or. &
+        (Model%imp_physics == Model%imp_physics_tempo)) then !Thompson/TEMPO microphysics
       Model%npdf3d  = 0
       Model%num_p3d = 3
       Model%num_p2d = 1
@@ -6171,7 +6176,7 @@ module GFS_typedefs
         print *,' Thompson MP requires effr_in to be set to .true. - job aborted'
         stop
       end if
-      if (Model%me == Model%master) print *,' Using Thompson double moment microphysics', &
+      if (Model%me == Model%master) print *,' Using Thompson/TEMPO double moment microphysics', &
                                           ' ltaerosol = ',Model%ltaerosol, &
                                           ' mraerosol = ',Model%mraerosol, &
                                           ' ttendlim =',Model%ttendlim, &
@@ -6728,7 +6733,8 @@ module GFS_typedefs
         print *, ' wminco            : ', Model%wminco
         print *, ' '
       endif
-      if (Model%imp_physics == Model%imp_physics_wsm6 .or. Model%imp_physics == Model%imp_physics_thompson) then
+      if ((Model%imp_physics == Model%imp_physics_wsm6) .or. (Model%imp_physics == Model%imp_physics_thompson) .or. &
+           (Model%imp_physics == Model%imp_physics_tempo)) then
         print *, ' Thompson microphysical parameters'
         print *, ' ltaerosol         : ', Model%ltaerosol
         print *, ' mraerosol         : ', Model%mraerosol
