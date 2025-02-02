@@ -3155,7 +3155,7 @@
   dimensions = (horizontal_dimension)
   type = real
   kind = kind_phys
-  active = (control_for_microphysics_scheme == identifier_for_thompson_microphysics_scheme .and. (flag_for_aerosol_physics .or. do_merra2_aerosol_awareness))
+  active = ((control_for_microphysics_scheme == identifier_for_thompson_microphysics_scheme .or. control_for_microphysics_scheme == identifier_for_tempo_microphysics_scheme) .and. (flag_for_aerosol_physics .or. do_merra2_aerosol_awareness))
 [nifa2d]
   standard_name = tendency_of_nonhygroscopic_ice_nucleating_aerosols_at_surface_adjacent_layer
   long_name = instantaneous ice-friendly sfc aerosol source
@@ -3163,7 +3163,7 @@
   dimensions = (horizontal_dimension)
   type = real
   kind = kind_phys
-  active = (control_for_microphysics_scheme == identifier_for_thompson_microphysics_scheme .and. (flag_for_aerosol_physics .or. do_merra2_aerosol_awareness))
+  active = ((control_for_microphysics_scheme == identifier_for_thompson_microphysics_scheme .or. control_for_microphysics_scheme == identifier_for_tempo_microphysics_scheme) .and. (flag_for_aerosol_physics .or. do_merra2_aerosol_awareness))
 [ebu_smoke]
   standard_name = ebu_smoke
   long_name = buffer of vertical fire emission

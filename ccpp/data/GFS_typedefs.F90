@@ -3264,7 +3264,9 @@ module GFS_typedefs
     endif
 
     !--- needed for Thompson's aerosol option
-    if(Model%imp_physics == Model%imp_physics_thompson .and. (Model%ltaerosol .or. Model%mraerosol)) then
+    if((Model%imp_physics == Model%imp_physics_thompson .or. &
+         Model%imp_physics == Model%imp_physics_tempo) .and. &
+         (Model%ltaerosol .or. Model%mraerosol)) then
       allocate (Coupling%nwfa2d (IM))
       allocate (Coupling%nifa2d (IM))
       Coupling%nwfa2d   = clear_val

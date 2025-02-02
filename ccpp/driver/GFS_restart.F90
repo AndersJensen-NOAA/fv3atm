@@ -145,7 +145,8 @@ module GFS_restart
       Restart%num2d = Restart%num2d + 2
     endif
     ! Thompson aerosol-aware
-    if (Model%imp_physics == Model%imp_physics_thompson .and. Model%ltaerosol) then
+    if ((Model%imp_physics == Model%imp_physics_thompson .or. &
+         Model%imp_physics == Model%imp_physics_tempo) .and. (Model%ltaerosol)) then
       Restart%num2d = Restart%num2d + 2
     endif
     if (Model%do_cap_suppress .and. Model%num_dfi_radar>0) then
@@ -458,7 +459,8 @@ module GFS_restart
       enddo
     endif
     ! Thompson aerosol-aware
-    if (Model%imp_physics == Model%imp_physics_thompson .and. Model%ltaerosol) then
+    if ((Model%imp_physics == Model%imp_physics_thompson .or. &
+         Model%imp_physics == Model%imp_physics_tempo) .and. (Model%ltaerosol)) then
       num = num + 1
       Restart%name2d(num) = 'thompson_2d_nwfa2d'
       do nb = 1,nblks
