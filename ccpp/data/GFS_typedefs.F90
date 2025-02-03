@@ -6160,8 +6160,8 @@ module GFS_typedefs
                                           ' num_p2d =',Model%num_p2d
 
 
-   elseif ((Model%imp_physics == Model%imp_physics_thompson) .or. &
-        (Model%imp_physics == Model%imp_physics_tempo)) then !Thompson/TEMPO microphysics
+   elseif (Model%imp_physics == Model%imp_physics_thompson .or. &
+        Model%imp_physics == Model%imp_physics_tempo) then !Thompson/TEMPO microphysics
       Model%npdf3d  = 0
       Model%num_p3d = 3
       Model%num_p2d = 1
